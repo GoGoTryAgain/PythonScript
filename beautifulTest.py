@@ -6,12 +6,12 @@ import io
 #reload(sys)  
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='gb18030')  
 
-
+#用户名zywlzhul
 class BeautifulPicture():
 
     def __init__(self):  #类的初始化操作
         self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1'}  #给请求指定一个请求头来模拟chrome浏览器
-        self.web_url = 'http://www.zict.cn/'  #要访问的网页地址
+        self.web_url = 'http://www.zict.cn/relogin.asp'  #要访问的网页地址
         self.folder_path = 'C:\BeautifulPicture'  #设置图片要存放的文件目录
 
     def get_pic(self):
