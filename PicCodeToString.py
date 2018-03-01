@@ -1,10 +1,10 @@
 import PIL.Image as Image
-import pytesseract
 import os
+from pytesser3 import image_to_string
 
 #os.chdir('c:/Python27/Lib/site-packages/pytesser')#修改工作路径即可  
 
-imgsrc = 'C:\BeautifulPicture\code.jpg'
+imgsrc = os.getcwd() + '\\code.PNG'
 #灰化图片处理  
 im = Image.open(imgsrc)  
   
@@ -22,7 +22,7 @@ for i in range(256):
 out = imgry.point(table, '1')  
 
 print('save out pic')
-out.save('C:/BeautifulPicture/rgb.png')  
+out.save('rgb.png')
 
 
 #vcode = pytesseract.image_to_string(out)  
@@ -31,7 +31,7 @@ out.save('C:/BeautifulPicture/rgb.png')
 #print (vcode)  
 
 
-txtcode = pytesseract.image_to_string(out)  
+txtcode = image_to_string(out)
 
 
-print (u"\n识别出验证码文字为：",image_to_string(out)) 
+print (u"\n识别出验证码文字为：",txtcode)

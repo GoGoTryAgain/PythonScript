@@ -11,8 +11,8 @@ class BeautifulPicture():
 
     def __init__(self):  #类的初始化操作
         self.headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.1 (KHTML, like Gecko) Chrome/22.0.1207.1 Safari/537.1'}  #给请求指定一个请求头来模拟chrome浏览器
-        self.web_url = 'http://www.zict.cn/relogin.asp'  #要访问的网页地址
-        self.folder_path = 'C:\BeautifulPicture'  #设置图片要存放的文件目录
+        self.web_url = 'http://www.zict.cn/'  #要访问的网页地址
+        self.folder_path = os.getcwd()  #设置图片要存放的文件目录
 
     def get_pic(self):
         print('开始网页get请求')
@@ -51,7 +51,7 @@ class BeautifulPicture():
         img = self.request(url)
         file_name = name + '.jpg'
         print('开始保存图片')
-        f = open(file_name, 'ab')
+        f = open(file_name, 'wb')
         f.write(img.content)
         print(file_name,'图片保存成功！')
         f.close()
