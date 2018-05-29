@@ -7,10 +7,8 @@ import sys
 import io
 import re
 import time
-import win32api
-import win32con
 import configparser
-
+import random
 
 
 CookieIniFilePath = 'CookieConfig.ini'
@@ -301,25 +299,41 @@ if __name__ == '__main__':
     BoxIDfile = '箱号.txt'
     while True:
         os.system('cls')
+        linebox = 0
         try :
             with open(BoxIDfile,'r+') as BoxFD:
                 for BoxId in BoxFD:
+                    linebox = linebox + 1
                     if not CheckInputValid(BoxId):
-                        print('箱号：' + BoxId.strip() + ' 箱号错误，请检查输入')
-                        continue
+                        if BoxId.strip().lstrip().rstrip('\n').rstrip('\r') == '':
+                            continue
+                        else:
+                            print('箱号：' + BoxId.strip() + '           格式错误，请检查输入,错误位于第' + str(linebox) + '行' )
+                            continue
                     SetCookies()
-                    # BoxId = 'TRHU2604288'
                     Checkresult = GetBoxInfo(BoxId)
                     if Checkresult:
-                        print('箱号：' + Checkresult['箱号'] + '  结果：' + Checkresult['回执'] + '时间：' + Checkresult['发送时间'])
+                        print('箱号：' + Checkresult['箱号'] + '     结果：' + Checkresult['回执'] + '时间：' + Checkresult['发送时间'])
                     else:
                         print('箱号：' + BoxId.strip() + '   结果： 未收到回执')
 
-                    time.sleep(3)
-        except:
+                    time.sleep(random.uniform(1,2.5))
+        except IOError:
             print('检查  ','\"',BoxIDfile,'\"  '+'是否存在，如果没有请新建文件'  )
-        print('等待30s')
-        time.sleep(30)
+            exit()
+            os.system('cmd')
+        except:
+            print('发生错误'  )
+            exit()
+            os.system('cmd')
+
+
+        timeWaitTotal = 30
+        for timewait in range(timeWaitTotal):
+            time.sleep(1)
+            if not timewait % 5:
+                print(timeWaitTotal - timewait,'s后重新获取')
+
 
 
 
